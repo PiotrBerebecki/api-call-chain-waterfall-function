@@ -3,6 +3,9 @@ var urlRepos = 'https://api.github.com/users/piotrberebecki/repos';
 var langCount;
 var starCount;
 
+
+
+
 function makeRequest(url, cb) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', url, true);
@@ -17,10 +20,8 @@ function makeRequest(url, cb) {
 }
 
 
-function showUserProfile(data) {
-  imgDOM.src = data.avatar_url;
-  repoNumberDOM.textContent = data.public_repos;
-}
+
+
 
 
 function handleRepoResults(reposArr) {
@@ -32,9 +33,20 @@ function handleRepoResults(reposArr) {
 }
 
 
+
+
+
+function showUserProfile(data) {
+  imgDOM.src = data.avatar_url;
+  repoNumberDOM.textContent = data.public_repos;
+}
+
+
+
 function showUserLanguages(data) {
   langDOM.textContent = getLang(data);
 }
+
 
 
 function getLang(data) {
@@ -49,9 +61,13 @@ function showTopRepo(data) {
 }
 
 
+
+
 var imgDOM = document.getElementById('github-user-avatar');
 var repoNumberDOM = document.getElementById('github-user-repos');
 var langDOM = document.getElementById('github-repos-languages');
+
+
 
 
 makeRequest(urlProfile, showUserProfile);
