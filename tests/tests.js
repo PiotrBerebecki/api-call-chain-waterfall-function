@@ -1,25 +1,24 @@
-test( "hello test", function( assert ) {
-  assert.ok( 1 == "1", "Passed!" );
+test('hello test', assert => {
+  assert.ok(1 == "1");
 });
 
-test('does avatar image exist', function(assert){
-  var done = assert.async();
-  setTimeout(function() {
-    assert.equal(imgDOM.src, 'https://avatars1.githubusercontent.com/u/17753038?v=3');
+test('handleLocation', assert => {
+  const fakeObj = {};
+  const fakeResponseText = '{"city":"London","location":{"latitude":50.1,"longitude":-0.18}}';
+  const expected = {
+    city: 'London',
+    latitude: 50.1,
+    longitude: -0.18
+  };
+  assert.deepEqual(handleLocation(fakeObj, fakeResponseText), expected);
+});
+
+
+test('makeRequest', assert => {
+  const done = assert.async();
+
+  makeRequest('https://geoip.nekudo.com/api/', function(err, responseText) {
+    assert.ok(typeof responseText == 'string', 'receives response text');
     done();
-  }, 3000);
-
-});
-
-test('is Number of repos returning a number', function(assert){
-  var done = assert.async();
-  setTimeout(function() {
-    assert.equal(typeof Number(repoNumberDOM.textContent), 'number');
-    done();
-  }, 3000);
-});
-
-test( 'is getLang returning a string', function(assert) {
-  var fakeRepos = [{language: 'HTML'}, {language: 'CSS'}]
-  assert.equal(getLang(fakeRepos), 'HTML CSS');
+  });
 });
